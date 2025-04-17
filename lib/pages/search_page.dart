@@ -58,7 +58,14 @@ class _SearchPageState extends State<SearchPage> {
                 itemBuilder: (context, index) {
                   final shoe = filteredShoes[index];
                   return ListTile(
-                    leading: Image.asset(shoe.imagePath, width: 50, height: 50),
+                    leading: Image.asset(
+                      'lib/photo/${shoe.imagePath}', // Updated path
+                      width: 50,
+                      height: 50,
+                      errorBuilder: (context, error, stackTrace) {
+                        return const Icon(Icons.broken_image, size: 50); // Fallback icon
+                      },
+                    ),
                     title: Text(shoe.name),
                     subtitle: Text('\$${shoe.price}'),
                   );
